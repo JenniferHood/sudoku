@@ -228,7 +228,6 @@ Grid.prototype.remaining = function () {
   return this.remainingArray().length;
 }
 
-
 Grid.prototype.save = function () {
   return this.allCells.slice();
 };
@@ -248,7 +247,6 @@ Grid.prototype.toString = function () {
     });
     return string;
 };
-
 
 Grid.prototype.fromString = function (initstr) {
   this.allCells = [];
@@ -281,4 +279,33 @@ Grid.prototype.groupNeeds = function (groupToken) {
   return digitSet;
 };
 
+Grid.prototype.nameForToken = function (token) {
+  if (typeof(token) === typeof(1)) {
+    return ("Cell: " + token)
+  } else {
+    var prefix = "";
+    switch (token[0]) {
+    case "c":
+      prefix = "Column: "
+      break;
+    case "r":
+      prefix = "Row: "
+      break;
+    case "b":
+      prefix = "Block: "
+      break;
+    }
+    return prefix + token[1];
+  }
+}
+
 module.exports = Grid;
+
+
+
+
+
+
+
+
+

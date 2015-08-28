@@ -156,4 +156,19 @@ describe('Testing Grid', function() {
       expect(grid.getAllDigitSets()[0]).to.deep.equal(new DigitSet('1'));
     });
   });
+  describe('grid.nameForToken()', function(){
+    it('should return "Column: 8"', function(){
+      expect(grid.nameForToken(["c", 8])).to.equal("Column: 8");
+    })
+    it('should return "Row: 0"', function(){
+      expect(grid.nameForToken(["r", 0])).to.equal("Row: 0");
+    })
+    it('should return "Block: 5"', function(){
+      expect(grid.nameForToken(["b", 5])).to.equal("Block: 5");
+    })
+    it('should return "Cell: 8"', function(){
+      expect(grid.nameForToken(8)).to.equal("Cell: 8");
+    })
+    
+  })
 });
