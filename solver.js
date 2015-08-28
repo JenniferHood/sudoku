@@ -105,7 +105,7 @@ var Solver = (function() {
 
 	Solver.prototype.trimCell = function(cell) {//-->1-9 if newly unique, else undef
 	//!bug!  to fix: first build union of all neighbors, then eliminate from cell
-		if (cell.digit())
+		if (this.game.getPossibles(cell).size() ===1)
 			return;
 		var union = (this.game.neighborhood)?
 			this.game.neighborhood(cell):
