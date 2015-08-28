@@ -54,8 +54,8 @@ DigitSet.prototype.toString = function (delim) {
 };
 
 DigitSet.prototype.toArray = function () {
-	this.possibles.sort();
-	return this.possibles.slice();
+  this.possibles.sort();
+  return this.possibles.slice();
 };
 
 DigitSet.prototype.isUncertain = function () {

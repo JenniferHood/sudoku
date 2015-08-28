@@ -9,24 +9,24 @@ function validateCellToken(cellToken) {
 }
 
 function Grid(initstr) {
-	this.allCells = [];
-	if (arguments.length > 0){
-	 var values = initstr.split("");
-	 values = values.map(function(e){
-		 if (e === "."){
-			 return null;
-		 } else{
-			 return e;
-		 }
-	 });
-	 values.forEach(function(e){
+  this.allCells = [];
+  if (arguments.length > 0){
+   var values = initstr.split("");
+   values = values.map(function(e){
+     if (e === "."){
+       return null;
+     } else{
+       return e;
+     }
+   });
+   values.forEach(function(e){
      if (e !== null) {
        this.allCells.push(new DigitSet(e));
      } else {
        this.allCells.push(new DigitSet());
      }
- 	}, this);
-	}
+  }, this);
+  }
 }
 
 Grid.prototype.cells = function (groupToken) {
@@ -230,7 +230,7 @@ Grid.prototype.remaining = function () {
 
 
 Grid.prototype.save = function () {
-	return this.allCells.slice();
+  return this.allCells.slice();
 };
 
 Grid.prototype.restore = function (state) {
@@ -238,35 +238,35 @@ Grid.prototype.restore = function (state) {
 };
 
 Grid.prototype.toString = function () {
-	var string = "";
+  var string = "";
     this.allCells.forEach(function(e){
-			if(e.isUncertain()){
-				string += ".";
-			}else{
-				string += e.toString();
-			}
-		});
-		return string;
+      if(e.isUncertain()){
+        string += ".";
+      }else{
+        string += e.toString();
+      }
+    });
+    return string;
 };
 
 
 Grid.prototype.fromString = function (initstr) {
-	this.allCells = [];
-	var values = initstr.split("");
-	values = values.map(function(e){
-		if (e === "."){
-			return null;
-		} else{
-			return e;
-		}
-	});
-	values.forEach(function(e){
-		if (e !== null) {
-			this.allCells.push(new DigitSet(e));
-		} else {
-			this.allCells.push(new DigitSet());
-		}
-	}, this);
+  this.allCells = [];
+  var values = initstr.split("");
+  values = values.map(function(e){
+    if (e === "."){
+      return null;
+    } else{
+      return e;
+    }
+  });
+  values.forEach(function(e){
+    if (e !== null) {
+      this.allCells.push(new DigitSet(e));
+    } else {
+      this.allCells.push(new DigitSet());
+    }
+  }, this);
 };
 
 Grid.prototype.groupNeeds = function (groupToken) {
@@ -281,32 +281,4 @@ Grid.prototype.groupNeeds = function (groupToken) {
   return digitSet;
 };
 
-
-var myGrid = new Grid(".94...13..............76..2.8..1.....32.........2...6.....5.4.......8..7..63.4..8");
-// myGrid = new Grid("123456789456789123789123456234567891567891234891234567345678912678912345912345678");
-
-// console.log(myGrid.getDigitSetsForBlock(3));
-// console.log(myGrid.getDigitSetsForBlock(40));
-// // console.log(myGrid.getNeighborhood(40));
-// console.log(myGrid.remaining());
-// console.log();
-// // var thisCell = myGrid.remainingArray()[7];
-// // var thisCellsAbsID = myGrid.getAllDigitSets.indexOf(thisCell);
-// console.log(thisCellsAbsID);
-// console.log();
-
-
-
-
-// console.log(myGrid);// for testing only
-// console.log(myGrid.getRowNumber(0));
-// console.log(myGrid.getRowNumber(8));
-// console.log(myGrid.getRowNumber(9));
-// console.log(myGrid.getRowNumber(18));
-// myGrid.getDigitSetsForBlock(23);
-// console.log(myGrid.getCells());
-myGrid.getDigitSetsForBlock(23);
-// console.log(myGrid.getAllDigitSets());
 module.exports = Grid;
-console.log(validateCellToken(10));
-console.log(myGrid.getRowNumber(40));
