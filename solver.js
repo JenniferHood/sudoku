@@ -41,7 +41,7 @@ var Solver = (function() {
 		var snap = this.restore();
 		var cell = snap.cell;
 		var guess = snap.guess;
-		this.report('Impossible for %s to be %s',cell.name,guess);
+		this.report('Impossible for %s to be %s',this.game.cellName(cell),guess);
 		this.game.getPossible(cell).eliminate(guess);
 		//this.game.eliminate(cell,Sudoku.possible(guess));
 	}
@@ -73,7 +73,7 @@ var Solver = (function() {
 		var cell = unsolved[0];
 		var digits = game.getPossible(cell).toString();
 		var guess = digits[0];
-		this.report('Supposing that cell %s is %s...',cell.name,guess);
+		this.report('Supposing that cell %s is %s...',game.cellName(cell),guess);
 		this.store(cell,guess);
 		game.setPossible(cell,new DigitSet(guess));
 		return guess;
@@ -83,10 +83,10 @@ var Solver = (function() {
 		solver.game.cells().forEach(function(cell) {
 			var digit = solver.trimCell(cell);
 			if (digit)
-				solver.report('Cell %s must be %s',cell.name,digit);
+				solver.report('Cell %s must be %s',solver.game.cellName(cell),digit);
 		})
 		if (debug)
-			solver.viewer.show();
+			solver.viewer.showCertain();
 	}
 
 	// If the grid object has no neighborhood method, use this substitute:
@@ -105,7 +105,7 @@ var Solver = (function() {
 
 	Solver.prototype.trimCell = function(cell) {//-->1-9 if newly unique, else undef
 	//!bug!  to fix: first build union of all neighbors, then eliminate from cell
-		if (this.game.getPossibles(cell).size() ===1)
+		if (this.game.getPossible(cell).size() ===1)
 			return;
 		var union = (this.game.neighborhood)?
 			this.game.neighborhood(cell):
@@ -122,7 +122,7 @@ var Solver = (function() {
 			solver.completeGroup(grp);
 		})
 		//if (debug)
-		//	solver.viewer.show();
+		//	solver.viewer.showCertain();
 	}
 
 	Solver.prototype.completeGroup = function(group) {
@@ -136,10 +136,10 @@ var Solver = (function() {
 				return digitset.contains(digit);
 			})
 			if (possibleCells.length===0) {
-				throw (group.name + ' cannot get a '+digit+'!');
+				throw (game.groupName(group) + ' cannot get a '+digit+'!');
 			}
 			if (possibleCells.length===1) {
-				console.log(group.name+' can only get '+digit+' from cell '+possibleCells[0].name)
+				console.log(game.groupName(group) +' can only get '+digit+' from cell '+game.cellName(possibleCells[0]));
 				game.setPossible(possibleCells[0],new DigitSet(digit))
 				//game.cellHas(possibleCells[0]);
 			}
@@ -157,7 +157,7 @@ var Solver = (function() {
 				this.trim();
 				this.complete();
 				if (debug) {
-					this.viewer.show();
+					this.viewer.showCertain();
 					//console.log(this.game.remaining());
 				}
 			} catch (err) {
@@ -174,7 +174,7 @@ var Solver = (function() {
 		while (unsolved = this.trimHard()) {
 			// must've gotten stuck; time for a guess
 			if (debug)
-				this.viewer.show();
+				this.viewer.showCertain();
 			this.guess();
 		}
 		if (!unsolved)
