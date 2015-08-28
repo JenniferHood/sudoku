@@ -165,11 +165,11 @@ Grid.prototype.getDigitSetsForRow = function (cellToken) {
 
 Grid.prototype.getDigitSetsForCol = function (cellToken) {
   var col = this.getColNumber(cellToken);
-  var row = this.getRowNumber(cellToken)
+  var row = this.getRowNumber(cellToken);
   var cellIds = [];
   var digitSets = [];
 
-  for (var i = 0; i < 9; i++){
+  for (var i = 0; i < 9; i++) {
     if (i === row) continue;
     cellIds.push(col + 9 * i);
   }
@@ -179,6 +179,7 @@ Grid.prototype.getDigitSetsForCol = function (cellToken) {
   return digitSets;
 };
 
+// TODO: should this include itself in the list of known values for the neighborgood? It currently does not. Would need to change the behavior of its three helper functions
 Grid.prototype.getDigitSetsForBlock = function (cellToken) {
   var col = this.getColNumber(cellToken);
   var row = this.getRowNumber(cellToken);
@@ -193,7 +194,7 @@ Grid.prototype.getDigitSetsForBlock = function (cellToken) {
     if (i === idInThisBlock) continue;
     cellIds.push(9 * Math.floor(i / 3) + (i % 3) + topLeftSquare);
   }
-  cellIds.forEach(function(e){
+  cellIds.forEach(function(e) {
     digitSets.push(this.allCells[e]);
   }, this);
   return digitSets;
@@ -207,7 +208,8 @@ Grid.prototype.getNeighborhood = function (cellToken) {
   // console.log(allDigitSets);
   allDigitSets.forEach(function (e) {
     if (e.isUncertain() === false) {
-      newDigitSet.add(e.toArray());
+      newDigitSet.add(e);
+      // newDigitSet.add(e.toArray());
     }
   })
   return newDigitSet;
@@ -300,12 +302,3 @@ Grid.prototype.nameForToken = function (token) {
 }
 
 module.exports = Grid;
-
-
-
-
-
-
-
-
-

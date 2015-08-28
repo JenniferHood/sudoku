@@ -1,5 +1,6 @@
 var _ = require('lodash');
 
+// takes an array, removes all non-numbers and numbers < 1 and > 9, and returns the new array
 function removeInvalidArrayObjects(a) {
   if (!(a instanceof Array)) a = [a];
   return a.filter(function (e) {
@@ -15,8 +16,10 @@ function removeInvalidArrayObjects(a) {
 
 function DigitSet(possibles) {
   this.possibles = [];
-  if (arguments.length === 0){
-    this.possibles = ['1','2','3','4','5','6','7','8','9'];
+  if (arguments.length === 0) {
+    for (var i = 1; i < 10; i++) {
+      this.possibles.push(i.toString())
+    }
   } else {
     this.add(possibles)
   }
@@ -36,6 +39,9 @@ DigitSet.prototype.set = function (arrayOfDigits) {
 };
 
 DigitSet.prototype.add = function (digits) {
+  if (digits.constructor === DigitSet.prototype.constructor) {
+    digits = digits.toArray();
+  }
   digits = removeInvalidArrayObjects(digits);
   this.possibles =  _.union(digits, this.possibles);
 };
@@ -72,6 +78,10 @@ DigitSet.prototype.contains = function (digit) {
   }else{
     return false;
   }
+};
+
+DigitSet.prototype.inspect = function(depth, opts) {
+  return 'DigitSet -> (' + this.toArray() + ')';
 };
 
 module.exports = DigitSet;
