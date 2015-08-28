@@ -6,8 +6,11 @@ function Viewer(grid) {
 }
 
 Viewer.prototype.drawSelf = function() {
+  console.log(this.createASCIIBoard(this.grid.toString()));
   return this.createASCIIBoard(this.grid.toString());
 };
+
+Viewer.prototype.show = Viewer.prototype.drawSelf;
 
 Viewer.prototype.createASCIIBoard = function(str){
   var board = ""; // the string we will build up and eventually return

@@ -215,6 +215,8 @@ Grid.prototype.getNeighborhood = function (cellToken) {
   return newDigitSet;
 };
 
+Grid.prototype.neighborhood = Grid.prototype.getNeighborhood;
+
 Grid.prototype.remainingArray = function () {
   // look at every cell, build array of all uncertain cells, and return length of that array
   var uncertainCells = [];
@@ -280,6 +282,10 @@ Grid.prototype.groupNeeds = function (groupToken) {
   },this);
   return digitSet;
 };
+
+Grid.prototype.groupName = Grid.prototype.nameForToken;
+
+Grid.prototype.cellName = Grid.prototype.nameForToken;
 
 Grid.prototype.nameForToken = function (token) {
   if (typeof(token) === typeof(1)) {

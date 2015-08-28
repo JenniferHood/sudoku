@@ -52,6 +52,7 @@ DigitSet.prototype.eliminate = function (digits) {
   }
   digits = removeInvalidArrayObjects(digits);
   this.possibles = _.difference(this.possibles, digits);
+  return this;
 };
 
 DigitSet.prototype.toString = function (delim) {
