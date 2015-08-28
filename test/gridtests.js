@@ -111,7 +111,23 @@ describe('Testing Grid', function() {
     it('getRowNumber("") should return NaN', function() {
       expect(Number.isNaN(grid.getRowNumber(''))).to.be.true;
     });
-  });
+    
+      describe('grid.getPossible()', function() {
+        
+          it('returns the cell token', function() {
+            expect(grid.getPossible(40)).to.deep.equal(new DigitSet('9'));
+          });
+      });
+  });        
+  
+      describe('grid.setPossible()', function() {
+        
+          it('sets the cell token to the DigitSet', function() {
+            grid.setPossible(40, new DigitSet());
+            expect(grid.getPossible(40)).to.deep.equal(new DigitSet());
+          });
+      });
+  
   describe('grid.getColNumber()', function() {
 
     it('getColNumber(0) should return 0', function() {
@@ -127,6 +143,7 @@ describe('Testing Grid', function() {
       expect(Number.isNaN(grid.getColNumber(''))).to.be.true;
     });
   });
+  
   describe('grid.getAllDigitSets()', function() {
 
     it('cells() should return an Array', function() {
