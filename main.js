@@ -8,5 +8,6 @@ var game = new Grid(testStr);
 var viewer = new Viewer(game);
 console.log(viewer.drawSelf());
 // console.log(viewer.showHint(3));
-console.log(game.groupNeeds(['c', 3]));
-console.log(game.groupNeeds(['b', 0]));
+// console.log(game.groupNeeds(['c', 3]));
+// console.log(game.groupNeeds(['b', 0]));
+console.log(game.getNeighborhood(0));
