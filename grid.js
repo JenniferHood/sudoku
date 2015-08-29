@@ -283,10 +283,6 @@ Grid.prototype.groupNeeds = function (groupToken) {
   return digitSet;
 };
 
-Grid.prototype.groupName = Grid.prototype.nameForToken;
-
-Grid.prototype.cellName = Grid.prototype.nameForToken;
-
 Grid.prototype.nameForToken = function (token) {
   if (typeof(token) === typeof(1)) {
     return ("Cell: " + token)
@@ -306,5 +302,9 @@ Grid.prototype.nameForToken = function (token) {
     return prefix + token[1];
   }
 }
+
+Grid.prototype.groupName = Grid.prototype.nameForToken;
+
+Grid.prototype.cellName = Grid.prototype.nameForToken;
 
 module.exports = Grid;

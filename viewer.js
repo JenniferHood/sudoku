@@ -11,6 +11,7 @@ Viewer.prototype.drawSelf = function() {
 };
 
 Viewer.prototype.show = Viewer.prototype.drawSelf;
+Viewer.prototype.showCertain = Viewer.prototype.drawSelf;
 
 Viewer.prototype.createASCIIBoard = function(str){
   var board = ""; // the string we will build up and eventually return
