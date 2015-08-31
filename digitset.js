@@ -1,4 +1,6 @@
+if (typeof require === 'function'){
 var _ = require('lodash');
+}
 
 // takes an array, removes all non-numbers and numbers < 1 and > 9, and returns the new array
 function removeInvalidArrayObjects(a) {
@@ -85,4 +87,6 @@ DigitSet.prototype.inspect = function(depth, opts) {
   return 'DigitSet -> (' + this.toArray() + ')';
 };
 
-module.exports = DigitSet;
+if (typeof module !== 'undefined'){
+  module.exports = DigitSet;
+}

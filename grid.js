@@ -1,5 +1,7 @@
-var DigitSet = require('./digitset');
-var _ = require('lodash');
+if (typeof require === 'function'){
+  var DigitSet = require('./digitset');
+  var _ = require('lodash');
+}
 
 function validateCellToken(cellToken) {
   if (typeof(cellToken) !== "number" || cellToken < 0 || cellToken > 80) {
@@ -306,5 +308,7 @@ Grid.prototype.nameForToken = function (token) {
 Grid.prototype.groupName = Grid.prototype.nameForToken;
 
 Grid.prototype.cellName = Grid.prototype.nameForToken;
-
-module.exports = Grid;
+var testStr = '..2..7....1.....3...8..6..4..4....623...82..7...56.3.....4.5.........27.8.17.....';
+var testGrid = new Grid(testStr);
+console.log(testGrid);
+module.exports = testGrid;

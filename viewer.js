@@ -1,14 +1,16 @@
-var Grid = require('./grid.js');
+if (typeof require === 'function'){
+  var testGrid = require('./grid.js');
+}
 
 function Viewer(grid) {
   this.grid = grid;
   this.album = [];
 }
 
-Viewer.prototype.drawSelf = function() {
-  console.log(this.createASCIIBoard(this.grid.toString()));
-  return this.createASCIIBoard(this.grid.toString());
-};
+// Viewer.prototype.drawSelf = function() {
+//   console.log(this.createASCIIBoard(this.grid.toString()));
+//   return this.createASCIIBoard(this.grid.toString());
+// };
 
 Viewer.prototype.show = Viewer.prototype.drawSelf;
 Viewer.prototype.showCertain = Viewer.prototype.drawSelf;
@@ -59,5 +61,14 @@ Viewer.prototype.snapshot = function(){
 //  setInterval(1000)
 // };
 
+Viewer.prototype.drawSelf = function() {
+  var div = document.createElement("div")  //make a thing
+  div.innerHTML = (this.createASCIIBoard(this.grid.toString())); //set a thing
+  document.body.appendChild(div); //attach a thing
+};
 
+
+var testViewer = new Viewer(testGrid);
+testViewer.drawSelf();
 module.exports = Viewer;
+window.onload = doStuff
